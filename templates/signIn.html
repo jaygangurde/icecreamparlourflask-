@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Ice Cream Parlor</title>
+  </head>
+
+<style>
+    body{
+     font-family:'Times New Roman', Times, serif
+     background-repeat: no-repeat;
+     background-size: cover;
+     color : #cccccc;
+     background-attachment: fixed;
+     }
+   a:hover{
+       text-decoration: none;
+       color: white
+   }
+   .container{
+     border: 2px solid black;
+     width: 40%;
+     border-radius: 25px;
+     background-color :#cccccc;
+     color: black;
+   }
+
+
+</style>
+<body background="{{ url_for('static', filename ='background.jpg')}}">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/Products">
+      <img src={{url_for('static', filename = 'logo.png')}} alt="" width="50" height="50" class="d-inline-block align-text-top">
+  </a> <div style="color : black;"> IceCream<br> Parlor </div>
+
+
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+<!--      <button class="btn btn-outline-success my-2 mx-2 my-sm-0" type="submit"><a href="/SignIn">Sign In</a></button>-->
+      <button class="btn btn-outline-success my-2 mx-2 my-sm-0" type="submit"><a href="/">HOME </a></button>
+
+  </div>
+
+</nav>
+<div class="container mt-5 p-5" >
+<form action="/SignIn" method="post">
+  {%  if msg != NULL  %}
+  <div class="alert alert-danger" role="alert">
+    {{ msg }}
+  </div>
+  {% endif %}
+   {%  if success != NULL  %}
+  <div class="alert alert-success" role="alert">
+    {{ success }}
+  </div>
+  {% endif %}
+  <div class="form-group">
+    <label for="exampleInputEmail1">Mobile Number</label>
+    <input type="tel"  class="form-control" id="exampleInputEmail1" name = "mobileno" placeholder="Enter Mobile Number">
+    <small class="form-text text-muted">We'll never share your details with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+  </div>
+  <br>
+  <a href="/ForgetPassword" style="color : black; text-align: right;"> Forget Password ?? Click Here </a>
+  <br><br>
+  <button type="submit" class="btn btn-primary">SignIn</button>
+
+  <div style="float: right;">Don't Have Account ?
+    <button type="submit" class="btn btn-primary" ><a href="/SignUp" style=" color: white; "> Registration </a></button>
+  </div>
+</form>
+
+
+
+</div>
+  </body>
+</html>

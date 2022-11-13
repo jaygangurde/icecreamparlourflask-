@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Ice Cream Parlor</title>
+  </head>
+
+<style>
+   a:hover{
+       text-decoration: none;
+   }
+    body{
+       font-family:'Times New Roman', Times, serif
+     background-repeat: no-repeat;
+     background-size: cover;
+     background-attachment: fixed;
+     }
+
+
+</style>
+ <body background="{{ url_for('static', filename ='background.jpg')}}">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/Admin">
+      <img src={{url_for('static', filename = 'logo.png')}} alt="" width="50" height="50" class="d-inline-block align-text-top">
+  </a> <div style="color : black;"> IceCream<br> Parlor </div>
+
+
+      <ul class="navbar-nav mr-auto">
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+      <button class="btn btn-outline-success my-2 mx-2 my-sm-0" type="submit"><a href="/Admin">Back</a></button>
+      <button class="btn btn-outline-success my-2 mx-2 my-sm-0" type="submit"><a href="/AddProduct">Add Product</a></button>
+
+  </div>
+
+
+</nav>
+
+        <div class="row m-5">
+            <div class="col-lg-12 text-center border rounded text-color white" style="background-color : white;">
+                <h2>Product Details</h2>
+            </div>
+            <div class="col-lg-12">
+                <div class="border bg-light rounded">
+             <table class="table">
+                <thead class="text-center">
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Flavour</th>
+                    <th scope="col">Product Type</th>
+                    <th scope="col">Size </th>
+                    <th scope="col">Rate</th>
+
+                </thead>
+                <tbody class="text-center">
+    {% for item in result  %}
+
+
+                    <tr style="text-align: center;">
+
+                      <td>{{item.product_id}} </td>
+                      <td>{{item.flavour}}</td>
+                      <td>{{item.ptype}}</td>
+                      <td>{{item.size}}</td>
+                      <td> <h8> &#8377; {{item.rate}} </h8> </td>
+                      <td>
+                            <form action="/DeleteProduct" method="POST">
+                            <button class='btn btn-outline-danger' name="remove"> Delete </button>
+                            <input type='hidden' name='pid' value="{{item.product_id}}">
+                            </form>
+                        </td>
+                    </tr>
+
+                </tbody>
+                  {% endfor %}
+             </table>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+</body>
+</html>

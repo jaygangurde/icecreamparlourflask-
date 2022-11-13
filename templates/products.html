@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Ice Cream Parlor</title>
+  </head>
+
+<style>
+   body{
+     font-family:'Times New Roman', Times, serif
+       background-repeat: no-repeat;
+     background-size: cover;
+     background-attachment: fixed;
+     }
+   a:hover{
+       text-decoration: none;
+   }
+   .card:hover{
+      transform: scale(1.03);
+      box-shadow: 0 10px 10px 0 rgba(0,0,0,0.2);
+   }
+</style>
+ <body background="{{ url_for('static', filename ='background.jpg')}}">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/Products">
+      <img src={{url_for('static', filename = 'logo.png')}} alt="Logo Image " width="50" height="50" class="d-inline-block align-text-top">
+  </a><div style="color : black;"> IceCream<br> Parlor </div>
+
+
+
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+        <form class="d-flex" role="search" action="/Search"  method="POST" >
+        <input class="form-control me-2" type="text" placeholder="Search" name="search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <button class="btn btn-outline-success my-2 mx-2 my-sm-0" type="submit"><a href="/Cart">Cart({{ cart }})</a></button>
+      <button class="btn btn-outline-success my-2 mx-2 my-sm-0" type="submit"><a href="/SignIn">Sign In</a></button>
+      <button class="btn btn-outline-success my-2 mx-2 my-sm-0" type="submit"><a href="/Logout">LogOut</a></button>
+
+  </div>
+  </nav>
+
+<div class="container">
+
+  {%  if msg != NULL  %}
+  <div class="alert alert-danger" role="alert">
+    {{ msg }}
+  </div>
+  {% endif %}
+
+
+  {%  if success != NULL  %}
+  <div class="alert alert-success" role="alert">
+    {{ success }}
+  </div>
+  {% endif %}
+
+  <div class="row">
+    {% for item in products %}
+      <div class='col-md-3 col-12 mx-auto' style="margin: 5%; width: 100%; height: 500px; border-radius: 20%" >
+       <form action="/AddToCart"  method="POST">
+               <div class='card' style=" width: 100%; height: 320px;  border: 2px solid black;">
+                  <img class="card-img-top col-12 mx-12"  src="{{url_for('static', filename = 'images/'+ item.image )}}"
+                       alt="product image"   />
+                  <div class="card-body" style="  border: 2px solid black; background : white;">
+                      <h5 class="card-title fo"> {{item.flavour.title()}} {{item.ptype.title()}}</h5>
+                      <p class="card-text"><h9> {{item.size}}</h9>
+                      <br><h8> &#8377; {{item.rate}} </h8></p>
+                      <button class="button btn btn-primary" name="add_to_cart"> Add to Cart  </button>
+                      <input type="hidden" name="pid" value="{{item.product_id}}" >
+                  </div>
+                </div>
+
+            </form>
+      </div>
+
+       {% endfor %}
+                </div>
+</div>
+
+
+
+
+
+
+
+
+   </body>
+</html>

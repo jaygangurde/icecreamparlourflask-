@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Ice Cream Parlor</title>
+  </head>
+
+<style>
+   a:hover{
+       text-decoration: none;
+   }
+    body{
+     font-family:'Times New Roman', Times, serif
+     background-repeat: no-repeat;
+     background-size: cover;
+     background-attachment: fixed;
+     }
+
+
+
+</style>
+ <body background="{{ url_for('static', filename ='background.jpg')}}">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/Products">
+      <img src={{url_for('static', filename = 'logo.png')}} alt="" width="50" height="50" class="d-inline-block align-text-top">
+  </a> <div style="color : black;"> IceCream<br> Parlor </div>
+
+
+      <ul class="navbar-nav mr-auto">
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+    <button class="btn btn-outline-success my-2 mx-2 my-sm-0" type="submit"><a href="/Cart">Cart</a></button>
+    <button class="btn btn-outline-success my-2 mx-2 my-sm-0" type="submit"><a href="/Logout">Logout</a></button>
+
+
+  </div>
+
+
+</nav>
+  {%  if msg != NULL  %}
+  <div class="alert alert-danger" role="alert">
+    {{ msg }}
+  </div>
+  {% endif %}
+        <div class="row m-5">
+            <div class="col-lg-12 text-center border rounded text-color white" style="background-color : white;">
+                <h2>Previous Order Details</h2>
+            </div>
+            <div class="col-lg-12">
+                <div class="border bg-light rounded">
+             <table class="table">
+                <thead class="text-center">
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Order Date</th>
+                    <th scope="col">Mobile No.</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Rate </th>
+                    <th scope="col">Total</th>
+                   
+
+                </thead>
+                <tbody class="text-center">
+
+
+    {% for item in result  %}
+
+
+                    <tr style="text-align: center;">
+
+                      <td>{{item.order_id}} </td>
+                      <td>{{item.order_date}}</td>
+                      <td>{{item.mobile_number}}</td>
+                      <td>{{item.address}}</td>
+                         <td><img style="width: 200px; height: 100px;  border: 2px solid black;" src="{{url_for('static', filename = 'images/'+ item.image )}}" alt="product image"></td>
+                      <td>{{item.quantity}}</td>
+                      <td> <h8> &#8377; {{item.rate}} </h8> </td>
+                      <td> {{ item.amount }} </td>
+                      
+                    </tr>
+
+                </tbody>
+                  {% endfor %}
+             </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+</html>
